@@ -19,43 +19,6 @@ type SaltTokenJson struct {
 	} `json:"return"`
 }
 
-
-type SaltHostJson struct {
-	Return []struct {
-		Code02MorepayCn struct {
-			Kernelrelease string `json:"kernelrelease"`
-			Selinux       struct {
-				Enforced string `json:"enforced"`
-				Enabled  bool   `json:"enabled"`
-			} `json:"selinux"`
-			Serialnumber     string `json:"serialnumber"`
-			MemTotal         int    `json:"mem_total"`
-			Saltversioninfo  []int  `json:"saltversioninfo"`
-			Host             string `json:"host"`
-			ID               string `json:"id"`
-			Osrelease        string `json:"osrelease"`
-			NumCpus          int    `json:"num_cpus"`
-			HwaddrInterfaces struct {
-				Eth0 string `json:"eth0"`
-			} `json:"hwaddr_interfaces"`
-			IP4Interfaces struct {
-				Eth0 []string `json:"eth0"`
-			} `json:"ip4_interfaces"`
-			Init          string   `json:"init"`
-			LsbDistribID  string   `json:"lsb_distrib_id"`
-			FqdnIP4       []string `json:"fqdn_ip4"`
-			Saltversion   string   `json:"saltversion"`
-			ServerID      int      `json:"server_id"`
-			Oscodename    string   `json:"oscodename"`
-			Osfinger      string   `json:"osfinger"`
-			Virtual       string   `json:"virtual"`
-			Productname   string   `json:"productname"`
-			OsreleaseInfo []int    `json:"osrelease_info"`
-			Os            string   `json:"os"`
-		} `json:"code02.morepay.cn"`
-	} `json:"return"`
-}
-
 type Salt struct {
 	Config map[string]string //配置文件
 	Info   map[string]string
