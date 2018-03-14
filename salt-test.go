@@ -16,8 +16,8 @@ func main()  {
 
 	S:=go_salt.Salt{}
 	S.Config=Config
-
-    //saltstack api 判断文件是否存在
+	
+	//saltstack api 判断文件是否存在
 	post_cmd_1 := fmt.Sprintf(`{"fun": "%s", "client": "%s", "tgt": "%s" ,"arg": "/etc/passwd"}`, "file.file_exists", "local", "host01")
 	if PostData, Err := S.CMD_SALT(post_cmd_1); Err == nil {
 		fmt.Println(PostData)
@@ -26,7 +26,6 @@ func main()  {
 	}
 
 	//saltstack api 执行命令
-
 	post_cmd_2 := fmt.Sprintf(`{"fun": "%s", "client": "%s", "tgt": "%s" ,"arg": "%s"}`, "cmd.run", "local", "host01","free -m")
 	if PostData, Err := S.CMD_SALT(post_cmd_2); Err == nil {
 		fmt.Println(PostData)
