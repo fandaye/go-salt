@@ -1,6 +1,78 @@
 # go-salt
 
+## 下载安装包
+   
+    go get github.com/fandaye/go-salt
+   
+## import 包
 
-使用参考：[salt-test.go](https://github.com/fandaye/go-salt/blob/master/salt-test.go)
+    import (
+    	"github.com/fandaye/go-salt"
+    ）
+    
+## 定义`Saltstack`配置文件
 
-注意过滤掉文件 ： salt-test.go  ; 它只是个测试文件
+    	Config := make(map[string]string)
+    	Config["salt_addr"]="10.100.4.36"
+    	Config["salt_prot"]="8080"
+    	Config["salt_user"]="salt"
+    	Config["salt_passwd"]="salt"
+    
+## 基础使用
+
+    	S:=go_salt.Salt{}
+    	S.Config=Config
+    	
+    	//saltstack api 判断文件是否存在
+    	post_cmd_1 := fmt.Sprintf(`{"fun": "%s", "client": "%s", "tgt": "%s" ,"arg": "/etc/passwd"}`, "file.file_exists", "local", "host01")
+    	if PostData, Err := S.CMD_SALT(post_cmd_1); Err == nil {
+    		fmt.Println(PostData)
+    	}else {
+    		log.Println(Err.Error())
+    	}
+    
+    	//saltstack api 执行命令
+    	post_cmd_2 := fmt.Sprintf(`{"fun": "%s", "client": "%s", "tgt": "%s" ,"arg": "%s"}`, "cmd.run", "local", "host01","free -m")
+    	if PostData, Err := S.CMD_SALT(post_cmd_2); Err == nil {
+    		fmt.Println(PostData)
+    	}else {
+    		log.Println(Err.Error())
+    	}
+      
+## 完整实例
+
+    package main
+    
+    import (
+    	"github.com/fandaye/go-salt"
+    	"fmt"
+    	"log"
+    )
+    
+    func main()  {
+    	//定义配置文件
+    	Config := make(map[string]string)
+    	Config["salt_addr"]="10.100.4.36"
+    	Config["salt_prot"]="8080"
+    	Config["salt_user"]="salt"
+    	Config["salt_passwd"]="salt"
+    
+    	S:=go_salt.Salt{}
+    	S.Config=Config
+    	
+    	//saltstack api 判断文件是否存在
+    	post_cmd_1 := fmt.Sprintf(`{"fun": "%s", "client": "%s", "tgt": "%s" ,"arg": "/etc/passwd"}`, "file.file_exists", "local", "host01")
+    	if PostData, Err := S.CMD_SALT(post_cmd_1); Err == nil {
+    		fmt.Println(PostData)
+    	}else {
+    		log.Println(Err.Error())
+    	}
+    
+    	//saltstack api 执行命令
+    	post_cmd_2 := fmt.Sprintf(`{"fun": "%s", "client": "%s", "tgt": "%s" ,"arg": "%s"}`, "cmd.run", "local", "host01","free -m")
+    	if PostData, Err := S.CMD_SALT(post_cmd_2); Err == nil {
+    		fmt.Println(PostData)
+    	}else {
+    		log.Println(Err.Error())
+    	}
+    }
