@@ -2,12 +2,12 @@
 
 ## 下载安装包
    
-    go get github.com/fandaye/go-salt
+    go get github.com/misrn/go-salt
    
 ## import 包
 
     import (
-    	"github.com/fandaye/go-salt"
+    	"github.com/misrn/go-salt"
     ）
     
 ## 定义`Saltstack`配置文件
